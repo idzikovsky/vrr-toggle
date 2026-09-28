@@ -3,5 +3,6 @@
   "name": "VRR Toggle",
   "description": "Quick Settings toggle for Variable Refresh Rate on all VRR-capable monitors.",
   "shell-version": ["50"],
-  "url": "https://github.com/idzikovsky/vrr-toggler"
+  "url": "https://github.com/idzikovsky/vrr-toggler",
+  "settings-schema": "org.gnome.shell.extensions.vrr-toggler"
 }

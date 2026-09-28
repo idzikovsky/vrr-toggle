@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.vrr-toggler"
+          path="/org/gnome/shell/extensions/vrr-toggler/">
+    <key name="confirm-display-change" type="b">
+      <default>true</default>
+      <summary>Ask to keep display settings</summary>
+      <description>Show the "Keep these display settings?" dialog after toggling VRR. When disabled, the change is kept immediately and will not revert automatically if the display stops working.</description>
+    </key>
+  </schema>
+</schemalist>

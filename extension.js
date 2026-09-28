@@ -8,7 +8,7 @@ import * as Vrr from './vrr.js';
 
 const VrrToggle = GObject.registerClass(
 class VrrToggle extends QuickToggle {
-    _init() {
+    _init(settings) {
         super._init({
             title: 'VRR',
             iconName: 'video-display-symbolic',
@@ -16,6 +16,7 @@ class VrrToggle extends QuickToggle {
             visible: false,
         });
 
+        this._settings = settings;
         this._syncId = 0;
         this._unsubscribe = Vrr.subscribeMonitorsChanged(() => this._sync());
         this.connect('clicked', () => this._apply(this.checked));
@@ -34,14 +35,29 @@ class VrrToggle extends QuickToggle {
             this.subtitle = capable.length === 1
                 ? capable[0].name : `${capable.length} displays`;
         } catch (e) {
-            console.error('VRR Toggle: failed to read display state', e);
+            console.error('VRR Toggler: failed to read display state', e);
         }
     }
 
     async _apply(enable) {
-        // Mutter asks the shell to confirm persistent display changes, which
-        // shows the "Keep these display settings?" dialog. Block the shell's
-        // handler while our own change is applied and confirm it ourselves.
+        const skipConfirmation = !this._settings.get_boolean('confirm-display-change');
+        const bypass = skipConfirmation ? this._bypassConfirmation() : null;
+        try {
+            await Vrr.setVrr(enable);
+        } catch (e) {
+            console.error('VRR Toggler: failed to apply display config', e);
+            Main.notifyError('VRR Toggler', e.message);
+        } finally {
+            bypass?.();
+        }
+        this._sync();
+    }
+
+    // Mutter asks the shell to confirm persistent display changes, which shows
+    // the "Keep these display settings?" dialog. Block the shell's handler
+    // while our own change is applied and confirm it ourselves. Returns a
+    // function that confirms any pending change and restores the handler.
+    _bypassConfirmation() {
         const wm = global.window_manager;
         const shellHandler = GObject.signal_handler_find(wm,
             {signalId: 'confirm-display-change'});
@@ -51,19 +67,13 @@ class VrrToggle extends QuickToggle {
         if (shellHandler)
             GObject.signal_handler_block(wm, shellHandler);
 
-        try {
-            await Vrr.setVrr(enable);
-        } catch (e) {
-            console.error('VRR Toggle: failed to apply display config', e);
-            Main.notifyError('VRR Toggle', e.message);
-        } finally {
+        return () => {
             wm.disconnect(ourHandler);
             if (confirmRequested)
                 wm.complete_display_change(true);
             if (shellHandler)
                 GObject.signal_handler_unblock(wm, shellHandler);
-        }
-        this._sync();
+        };
     }
 
     destroy() {
@@ -77,7 +87,7 @@ class VrrToggle extends QuickToggle {
 export default class VrrToggleExtension extends Extension {
     enable() {
         this._indicator = new SystemIndicator();
-        this._indicator.quickSettingsItems.push(new VrrToggle());
+        this._indicator.quickSettingsItems.push(new VrrToggle(this.getSettings()));
         Main.panel.statusArea.quickSettings.addExternalIndicator(this._indicator);
     }
 
