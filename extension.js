@@ -133,6 +133,9 @@ class VrrToggle extends QuickToggle {
     async _apply(enable) {
         const skipConfirmation = !this._settings.get_boolean('confirm-display-change');
         const bypass = skipConfirmation ? this._bypassConfirmation() : null;
+        // Ignore clicks until this change is applied; a second change built
+        // from the same display state would be rejected by Mutter as stale.
+        this.reactive = false;
         try {
             await setVrr(enable);
         } catch (e) {
@@ -140,6 +143,8 @@ class VrrToggle extends QuickToggle {
             Main.notifyError('VRR Toggle', e.message);
         } finally {
             bypass?.();
+            if (!this._destroyed)
+                this.reactive = true;
         }
         this._sync();
     }
@@ -171,6 +176,7 @@ class VrrToggle extends QuickToggle {
         this._destroyed = true;
         this._unsubscribe?.();
         this._unsubscribe = null;
+        this._settings = null;
         super.destroy();
     }
 });

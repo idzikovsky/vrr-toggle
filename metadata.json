@@ -1,7 +1,7 @@
 {
   "uuid": "vrr-toggle@idzikovsky.github.io",
   "name": "VRR Toggle",
-  "description": "Quick Settings toggle for Variable Refresh Rate on all VRR-capable monitors.",
+  "description": "Adds a Variable Refresh Rate toggle to Quick Settings. Useful for working around VRR issues such as flickering with NVIDIA drivers. Optionally skips the 'Keep these display settings?' dialog.",
   "shell-version": ["50"],
   "url": "https://github.com/idzikovsky/vrr-toggle",
   "settings-schema": "org.gnome.shell.extensions.vrr-toggle"
