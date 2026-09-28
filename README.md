@@ -35,3 +35,7 @@ gnome-extensions prefs vrr-toggle@idzikovsky.github.io
 ## Acknowledgements
 Big thanks to the [Postnozet/vrr-blocker](https://github.com/Postnozet/vrr-blocker) project.  
 It's a great extension, but it doesn't suit my case: I run some games through Gamescope, so they report Gamescope's `WM_CLASS` instead of their own.
+
+---
+
+Made with the help of Claude Code (claude-opus-5.5).
