@@ -1,0 +1,7 @@
+{
+  "uuid": "vrr-toggler@idzikovsky.github.io",
+  "name": "VRR Toggle",
+  "description": "Quick Settings toggle for Variable Refresh Rate on all VRR-capable monitors.",
+  "shell-version": ["50"],
+  "url": "https://github.com/idzikovsky/vrr-toggler"
+}
