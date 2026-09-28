@@ -1,10 +1,10 @@
 # VRR Toggle
 
-Gnome Shell extension that adds a global Variable refresh rate switch to the Quick Settings menu.
+A GNOME Shell extension that adds a global Variable Refresh Rate (VRR) toggle to the Quick Settings menu.
 
 ![Screenshot](screenshot.png)
 
-It is handy to be able to quickly toggle VRR while running some apps and games beacuse of Nvidia 5374195 bug which causes flickering when Low Framerate Compensation kicks in.
+Being able to quickly toggle VRR is handy when running certain apps and games, because of NVIDIA bug 5374195, which causes flickering when Low Framerate Compensation (LFC) kicks in.
 
 ## Manual Installation
 
@@ -19,18 +19,19 @@ glib-compile-schemas ~/.local/share/gnome-shell/extensions/vrr-toggle@idzikovsky
 ```
 
 ### 3. Enable the extension
-Restart the GNOME Shell session, then run:
+Log out and back in, then run:
 ```bash
 gnome-extensions enable vrr-toggle@idzikovsky.github.io
 ```
 
 ## Usage
-There is an option to disable confirmation window that appears when you toggle VRR state.
+Click the VRR tile in Quick Settings to toggle VRR on or off.
+
+You can disable the "Keep these display settings?" confirmation dialog that appears when you toggle VRR. Open the extension preferences with:
 ```bash
 gnome-extensions prefs vrr-toggle@idzikovsky.github.io
 ```
 
-**Note**
-Big thanks to https://github.com/Postnozet/vrr-blocker project.
-
-It is a great extension it but does not suite my case, as I run some games using Gamescope which causes those games to run under Gamescope's WM_CLASS.
+## Acknowledgements
+Big thanks to the [Postnozet/vrr-blocker](https://github.com/Postnozet/vrr-blocker) project.  
+It's a great extension, but it doesn't suit my case: I run some games through Gamescope, so they report Gamescope's `WM_CLASS` instead of their own.
