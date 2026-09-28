@@ -1,4 +1,4 @@
-# VRR Toggler
+# VRR Toggle
 
 Gnome Shell extension that adds a global Variable refresh rate switch to the Quick Settings menu.
 
@@ -10,24 +10,24 @@ It is handy to be able to quickly toggle VRR while running some apps and games b
 
 ### 1. Clone the repository to the extension directory
 ```bash
-git clone https://github.com/idzikovsky/vrr-toggler.git ~/.local/share/gnome-shell/extensions/vrr-toggler@idzikovsky.github.io
+git clone https://github.com/idzikovsky/vrr-toggle.git ~/.local/share/gnome-shell/extensions/vrr-toggle@idzikovsky.github.io
 ```
 
 ### 2. Compile schemas
 ```bash
-glib-compile-schemas ~/.local/share/gnome-shell/extensions/vrr-toggler@idzikovsky.github.io/schemas/
+glib-compile-schemas ~/.local/share/gnome-shell/extensions/vrr-toggle@idzikovsky.github.io/schemas/
 ```
 
 ### 3. Enable the extension
 Restart the GNOME Shell session, then run:
 ```bash
-gnome-extensions enable vrr-toggler@idzikovsky.github.io
+gnome-extensions enable vrr-toggle@idzikovsky.github.io
 ```
 
 ## Usage
 There is an option to disable confirmation window that appears when you toggle VRR state.
 ```bash
-gnome-extensions prefs vrr-toggler@idzikovsky.github.io
+gnome-extensions prefs vrr-toggle@idzikovsky.github.io
 ```
 
 **Note**

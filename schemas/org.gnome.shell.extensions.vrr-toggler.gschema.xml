@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
-  <schema id="org.gnome.shell.extensions.vrr-toggler"
-          path="/org/gnome/shell/extensions/vrr-toggler/">
+  <schema id="org.gnome.shell.extensions.vrr-toggle"
+          path="/org/gnome/shell/extensions/vrr-toggle/">
     <key name="confirm-display-change" type="b">
       <default>true</default>
       <summary>Ask to keep display settings</summary>

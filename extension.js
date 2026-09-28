@@ -35,7 +35,7 @@ class VrrToggle extends QuickToggle {
             this.subtitle = capable.length === 1
                 ? capable[0].name : `${capable.length} displays`;
         } catch (e) {
-            console.error('VRR Toggler: failed to read display state', e);
+            console.error('VRR Toggle: failed to read display state', e);
         }
     }
 
@@ -45,8 +45,8 @@ class VrrToggle extends QuickToggle {
         try {
             await Vrr.setVrr(enable);
         } catch (e) {
-            console.error('VRR Toggler: failed to apply display config', e);
-            Main.notifyError('VRR Toggler', e.message);
+            console.error('VRR Toggle: failed to apply display config', e);
+            Main.notifyError('VRR Toggle', e.message);
         } finally {
             bypass?.();
         }
